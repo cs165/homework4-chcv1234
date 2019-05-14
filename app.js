@@ -5,6 +5,10 @@
 class App {
   constructor() {
     // TODO(you): Implement the constructor and add fields as necessary.
+
+      const menu = document.getElementById('menu');
+
+      this.menuscreen = new MenuScreen(menu);
   }
   // TODO(you): Add methods as necessary.
 }
