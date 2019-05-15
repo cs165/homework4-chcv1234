@@ -7,8 +7,13 @@ class App {
     // TODO(you): Implement the constructor and add fields as necessary.
 
       const menu = document.getElementById('menu');
+      const music = document.getElementById('music')
 
       this.menuscreen = new MenuScreen(menu);
+      //this.menuscreen.hide();
+
+      this.music = new MusicScreen(music);
+      this.music.hide();
   }
   // TODO(you): Add methods as necessary.
 }

@@ -1,3 +1,36 @@
 /*
 TODO(you): Write any additional styles you need here.
 */
+.control-bar
+{
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box
+{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.btn
+{
+    height: 60px;
+}
+
+.screen
+{
+    flex-grow: 1;
+    display: flex;
+    height: clc(100% - 70px);
+    max-width: 100%;
+    background-image: url("images/background.gif");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+}
