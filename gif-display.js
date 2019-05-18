@@ -6,20 +6,34 @@ class GifDisplay {
   constructor() {
     // TODO(you): Implement the constructor and add fields as necessary.
 
-      this.front = document.querySelector('#front');
-      this.back = document.querySelector('#back');
+      this.front = document.querySelector('.front');
+      this.back = document.querySelector('.back');
 
       this.Gifofjson ;
       this.dataLength ;
       this.Gimage = [] ;
       this.pre ;
 
+      //let test = 'dance' ;
+      this.GetGif = this.GetGif.bind(this);
+      //this.GetGif(test);
 
+      this.SetGifarray = this.SetGifarray.bind(this);
+      this.ChangeGif = this.ChangeGif.bind(this);
+
+      document.querySelector('.screen').addEventListener('click',this.ChangeGif);
+
+      console.log('GIF');
+
+      //this.front.style.zIndex = 3 ;
+      //this.back.style.zIndex = 2 ;
   }
   // TODO(you): Add methods as necessary.
 
   GetGif(theme) {
-      var GifAPT = "https://api.giphy.com/v1/gifs/search" + "?q" + theme + "&api_key=RtwDHQyEoyDZ5iVv1hUwDnLKIsaDzXDE&limit=25&rating=g";
+      let GifAPT = "https://api.giphy.com/v1/gifs/search" + "?q=" + theme + "&api_key=RtwDHQyEoyDZ5iVv1hUwDnLKIsaDzXDE&limit=25&rating=g";
+
+      console.log('API = ' + GifAPT) ;
 
       fetch(GifAPT)
           .then(Response => {
@@ -33,13 +47,17 @@ class GifDisplay {
                   this.Gifofjson = image;
               }
 
+              console.log(this.Gifofjson);
+              console.log(this.dataLength);
               //Function ;
+              this.SetGifarray();
           })
 
           .catch(err => {
               console.log(err);
 
               //Function ;
+              this.SetGifarray();
           })
   }
 
@@ -50,8 +68,12 @@ class GifDisplay {
       for(let i=0; i < this.dataLength; i++)
       {
         this.Gimage[i] = new Image() ;
-        this.Gimage[i].src = this.Gifofjson.datas[i].image.downsized.url ;
+        this.Gimage[i].src = this.Gifofjson.data[i].images.downsized.url ;
       }
+
+      this.front.style.backgroundImage = "url('"+this.Gimage[0].src+"')";
+      this.back.style.backgroundImage = "url('"+this.Gimage[1].src+"')";
+      this.pre = 1 ;
     }
   }
 
@@ -59,12 +81,30 @@ class GifDisplay {
   {
       let random = Math.floor(Math.random() * this.Gimage.length);
 
-      if(random !== this.pre)
+      this.front.classList.add('back');
+      this.front.classList.remove('front');
+      this.back.classList.add('front');
+      this.back.classList.remove('back');
+
+
+
+      this.front = document.querySelector('.front');
+      this.back = document.querySelector('.back');
+
+      while(true)
       {
-        break ;
+          random = Math.floor(Math.random() * this.Gimage.length);
+
+          if(random !== this.pre)
+          {
+              break ;
+          }
+
       }
 
       this.pre = random ;
+
+      this.back.style.backgroundImage = "url('"+this.Gimage[random].src+"')";
   }
 
 

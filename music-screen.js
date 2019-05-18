@@ -11,12 +11,21 @@ class MusicScreen {
   constructor(element) {
     // TODO(you): Implement the constructor and add fields as necessary.
       this.element = element ;
-      this.button = element.querySelector('.btn');
-      this.Gifscreen = element.querySelector('.screen');
+      this.button = this.element.querySelector('.btn');
+      this.Gifscreen = this.element.querySelector('.screen');
 
       this.player = new AudioPlayer();
       this.Gif = new GifDisplay();
       this.play = new PlayButton();
+
+      this.hide = this.hide.bind(this);
+      this.show = this.show.bind(this);
+      this._onkick = this._onkick.bind(this);
+      this.Btnstate = this.Btnstate.bind(this);
+
+      //this.button.addEventListener('click',this.Btnstate);
+
+
   }
   // TODO(you): Add methods as necessary.
 
@@ -28,5 +37,32 @@ class MusicScreen {
   show()
   {
     this.element.classList.remove('inactive');
+/*
+    this.player.setSong();
+    this.player.setKickCallback();
+    this.player.play();
+    */
   }
+
+  _onkick()
+  {
+      console.log('kick');
+      this.Gif.ChangeGif();
+  }
+
+  Btnstate()
+  {
+      if(this.button.src === "images/play.png")
+      {
+          this.button.src = "images/pause.png" ;
+          this.player.play();
+      }
+      else
+      {
+          this.button.src = "images/pause.png" ;
+          this.player.pause();
+      }
+  }
+
+
 }
