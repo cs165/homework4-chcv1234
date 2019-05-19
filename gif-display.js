@@ -13,6 +13,7 @@ class GifDisplay {
       this.dataLength ;
       this.Gimage = [] ;
       this.pre ;
+      this.enough = false ;
 
       //let test = 'dance' ;
       this.GetGif = this.GetGif.bind(this);
@@ -22,6 +23,7 @@ class GifDisplay {
       this.ChangeGif = this.ChangeGif.bind(this);
 
       document.querySelector('.screen').addEventListener('click',this.ChangeGif);
+      //addEventListener('kick',this.ChangeGif);
 
       console.log('GIF');
 
@@ -30,7 +32,7 @@ class GifDisplay {
   }
   // TODO(you): Add methods as necessary.
 
-  GetGif(theme) {
+  GetGif(theme , Gifenough) {
       let GifAPT = "https://api.giphy.com/v1/gifs/search" + "?q=" + theme + "&api_key=RtwDHQyEoyDZ5iVv1hUwDnLKIsaDzXDE&limit=25&rating=g";
 
       console.log('API = ' + GifAPT) ;
@@ -57,11 +59,11 @@ class GifDisplay {
               console.log(err);
 
               //Function ;
-              this.SetGifarray();
+              this.SetGifarray(Gifenough);
           })
   }
 
-  SetGifarray()
+  SetGifarray(Gifenough)
   {
     if(this.dataLength >= 2)
     {
@@ -74,7 +76,16 @@ class GifDisplay {
       this.front.style.backgroundImage = "url('"+this.Gimage[0].src+"')";
       this.back.style.backgroundImage = "url('"+this.Gimage[1].src+"')";
       this.pre = 1 ;
+      this.enough = true ;
     }
+    else
+    {
+        console.log("not enough GIF");
+        this.enough = false ;
+    }
+
+    Gifenough();
+
   }
 
   ChangeGif()

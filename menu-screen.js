@@ -7,6 +7,7 @@ class MenuScreen {
       // TODO(you): Implement the constructor and add fields as necessary.
 
       this.element = element;
+      this.nowurl = null ;
       this.SEL = document.querySelector('#song-selector');
       this.input = document.querySelector('#query-input');
 
@@ -15,11 +16,11 @@ class MenuScreen {
       //this.SEL.appendChild(op);
 
       this.Submit = this.Submit.bind(this);
-      //this.themeinput = this.themeinput.bind(this);
+      this.themeinput = this.themeinput.bind(this);
 
       const form = document.querySelector('form');
       form.addEventListener('submit', this.Submit);
-      //document.querySelector("#query-input").addEventListener('input',this.themeinput);
+      document.querySelector("#query-input").addEventListener('input',this.themeinput);
 
       fetch('https://fullstackccu.github.io/homeworks/hw4/songs.json')
           .then(Response => {
@@ -75,8 +76,16 @@ class MenuScreen {
         console.log('submit : ' + music.dataset.url);
         console.log('input : ' + this.input.value);
 
-        let keyword = new CustomEvent('keyword' , {detail:{Song : music.dataset.url , Theme : this.input.value}});
+        this.nowurl = music.dataset.url ;
+        let keyword = new CustomEvent('keyword' , {detail:{Theme : this.input.value}});
         document.dispatchEvent(keyword);
     }
+
+    themeinput()
+    {
+        document.querySelector('#error').classList.add('inactive');
+
+    }
+
     // TODO(you): Add methods as necessary.
 }

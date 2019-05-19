@@ -11,6 +11,8 @@ class App {
         document.addEventListener('keyword',this.tomusic);
 
       const music = document.getElementById('music')
+        this.Gifenough = this.Gifenough.bind(this);
+
 
       this.menuscreen = new MenuScreen(menu);
       //this.menuscreen.hide();
@@ -26,13 +28,26 @@ class App {
 
     tomusic(event)
     {
-        this.menuscreen.hide();
-        this.music.show();
+        this.music.Gif.GetGif(event.detail.Theme , this.Gifenough);
+    }
 
-        this.music.player.setSong(event.detail.Song);
-        //this.music.player.setKickCallback();
-        this.music.player.play();
+    Gifenough()
+    {
+        console.log('enough');
 
-        this.music.Gif.GetGif(event.detail.Theme);
+        if(this.music.Gif.enough === true)
+        {
+            this.menuscreen.hide();
+            this.music.show();
+
+            this.music.player.setSong(this.menuscreen.nowurl);
+            this.music.player.setKickCallback(this.music._onkick);
+            this.music.player.play();
+        }
+        else
+        {
+            let noGif = document.querySelector('#error');
+            noGif.classList.remove('inactive');
+        }
     }
 }
