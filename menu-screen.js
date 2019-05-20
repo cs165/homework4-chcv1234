@@ -36,7 +36,7 @@ class MenuScreen {
               for (let i of this.list) {
                   console.log(i);
                   var op = document.createElement("option");
-                  op.innerText = "" + i[0] + ' --- by' + i[1].artist + "";
+                  op.innerText = "" + i[1].title + ' --- by' + i[1].artist + "";
                   op.setAttribute("data-url", i[1].songUrl);
                   op.setAttribute("data-title", i[1].title);
                   op.setAttribute("data-artist", i[1].artist);

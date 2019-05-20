@@ -49,7 +49,7 @@ class MusicScreen {
   _onkick()
   {
       console.log('kick!');
-      //this.Gif.ChangeGif();
+      this.Gif.ChangeGif();
   }
 
   /*

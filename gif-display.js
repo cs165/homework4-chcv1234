@@ -22,7 +22,7 @@ class GifDisplay {
       this.SetGifarray = this.SetGifarray.bind(this);
       this.ChangeGif = this.ChangeGif.bind(this);
 
-      document.querySelector('.screen').addEventListener('click',this.ChangeGif);
+      //document.querySelector('.screen').addEventListener('click',this.ChangeGif);
       //addEventListener('kick',this.ChangeGif);
 
       console.log('GIF');
